@@ -1,0 +1,16 @@
+{
+  "name": "pet-faadil",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000p\u0000e\u0000t\u0000-\u0000f\u0000a\u0000a\u0000d\u0000i\u0000l\u0000\r\u0000 \u0000",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.16.2",
+    "dotenv": "^16.4.5"
+  }
+}
