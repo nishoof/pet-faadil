@@ -44,12 +44,14 @@ for (const file of commandFiles) {
 // FUNCTIONS
 
 function petFaadil(message) {
-    let reply = 'faadil has been pet ' + ++petCounter;
+    // let reply = 'faadil has been pet ' + ++petCounter;
     
-    if (petCounter == 1) reply += ' time';
-    else reply += ' times';
+    // if (petCounter == 1) reply += ' time';
+    // else reply += ' times';
 
-    message.reply(reply);
+    // message.reply(reply);
+
+    client.commands.get('petfaadil').execute(message);    
 }
 
 
