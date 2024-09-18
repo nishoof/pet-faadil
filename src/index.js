@@ -6,7 +6,6 @@ const { Client, IntentsBitField, Collection } = require('discord.js');
 const fs = require('node:fs');                              // file system module. used to read the commands directory and identify our command files
 const path = require('node:path');                          // helps construct paths to access files and directories
 
-// let ping = require("./commands/ping");
 let botId = '';
 let petCounter = 0;
 
@@ -41,26 +40,12 @@ for (const file of commandFiles) {
 
 
 
-// FUNCTIONS
-
-function petFaadil(message) {
-    client.commands.get('petfaadil').execute(message);    
-}
-
-
-
 // LISTENERS 
 
 // Listens for whenever the bot is ready
 client.on('ready', (c) => {
     console.log(`${c.user.tag} is online!`);
     botId = c.user.id;
-
-    // ping = require("./commands/ping.js");
-    // console.log('ping: ' + ping);
-    
-    // c.commands = new Collection();
-    // c.commands.set(ping.data.name, ping)
 });
 
 // Listens for new messages in the server
@@ -68,15 +53,14 @@ client.on(`messageCreate`, (message) => {
     let senderId = message.author.id;
     if (senderId == botId) return;                          // ignore messages sent by this bot
     
-    if (message.content == 'pet faadil') petFaadil(message);
+    if (message.content == 'pet faadil') {
+        client.commands.get('petfaadil').execute(message);
+    }
 });
 
 // Listens for interactions
 client.on('interactionCreate', async interaction => {
     if (!interaction.isChatInputCommand()) return;          // ignore any interactions that aren't slash commands
-
-    // if (interaction.commandName === 'pet faadil') petFaadil(interaction);
-    // else if (interaction.commandName === 'ping') ping.execute(interaction)
     
     console.log(interaction.commandName + " was called");
     
@@ -101,7 +85,6 @@ client.on('interactionCreate', async interaction => {
 
 
 
-// LOGIN
+// LOGIN 
 
-// Login (actually running the bot)
-client.login(TOKEN);
+client.login(TOKEN);                                        // Login (actually running the bot)

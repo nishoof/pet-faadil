@@ -1,19 +1,26 @@
 const { log } = require('console');
-const { SlashCommandBuilder, AttachmentBuilder } = require('discord.js');
+const { SlashCommandBuilder, AttachmentBuilder, ImageFormat } = require('discord.js');
 const fs = require('node:fs');                              // file system module. used to read the commands directory and identify our command files
 const path = require('node:path');                          // helps construct paths to access files and directories
-const imageLinks = [new AttachmentBuilder('image1.png'),
-	new AttachmentBuilder('image2.jpeg'),
-	new AttachmentBuilder('image3.png'),
-	new AttachmentBuilder('image4.png'),
-];
+const imageLinks = [];
 
 
 
 // ON START UP
 
+// init petCount
 var petCount = 0;
-initializePetCount()
+initializePetCount();
+
+// init images
+const imagesFolder = path.join(path.dirname(path.dirname(__dirname)), 'images');
+const imageFiles = fs.readdirSync(imagesFolder);
+for (let i = 0; i < imageFiles.length; i++) {
+    const file = imageFiles[i];
+    
+    const filePath = path.join(imagesFolder, file);
+    imageLinks[i] = new AttachmentBuilder(filePath);
+}
 
 
 
@@ -31,9 +38,8 @@ module.exports = {
 		if (petCount == 1) reply += ' time';
 		else reply += ' times';
 		
-		let x = Math.floor(Math.random() * 4)
+		let x = Math.floor(Math.random() * imageLinks.length)
 		await interaction.reply( { content: reply, files: [imageLinks[x]] } );
-		// await interaction.followUp({ files: [imageLinks[0]]});
 	},
 };
 
