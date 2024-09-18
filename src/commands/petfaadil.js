@@ -1,10 +1,23 @@
 const { log } = require('console');
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, AttachmentBuilder } = require('discord.js');
 const fs = require('node:fs');                              // file system module. used to read the commands directory and identify our command files
 const path = require('node:path');                          // helps construct paths to access files and directories
+const imageLinks = [new AttachmentBuilder('image1.png'),
+	new AttachmentBuilder('image2.jpeg'),
+	new AttachmentBuilder('image3.png'),
+	new AttachmentBuilder('image4.png'),
+];
+
+
+
+// ON START UP
 
 var petCount = 0;
 initializePetCount()
+
+
+
+// COMMAND BUILDER
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -18,9 +31,15 @@ module.exports = {
 		if (petCount == 1) reply += ' time';
 		else reply += ' times';
 		
-		await interaction.reply(reply);
+		let x = Math.floor(Math.random() * 4)
+		await interaction.reply( { content: reply, files: [imageLinks[x]] } );
+		// await interaction.followUp({ files: [imageLinks[0]]});
 	},
 };
+
+
+
+// FUNCTIONS
 
 // Increase the pet count by one in both this file and the JSON. The JSON is updated asynchronously
 function incramentPetCount() {
@@ -50,6 +69,7 @@ function incramentPetCount() {
 		petCount = jsonData.petCount;
     });
 }
+
 
 // Set the pet count to the appropriate value whenever the bot starts up
 function initializePetCount() {
