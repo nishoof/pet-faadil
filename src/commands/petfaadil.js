@@ -51,7 +51,7 @@ module.exports = {
 function incramentPetCount() {
 	petCount++;
 	
-	fs.readFile('data.json', 'utf8', (err, data) => {
+	fs.readFile('data/data.json', 'utf8', (err, data) => {
         if (err) {
             console.error('Error reading JSON file:', err);
             return;
@@ -64,7 +64,7 @@ function incramentPetCount() {
     
         const updatedJsonData = JSON.stringify(jsonData, null, 2);
     
-        fs.writeFile('data.json', updatedJsonData, (err) => {
+        fs.writeFile('data/data.json', updatedJsonData, (err) => {
             if (err) {
                 console.error('Error updating JSON file:', err);
             } else {
@@ -79,7 +79,7 @@ function incramentPetCount() {
 
 // Set the pet count to the appropriate value whenever the bot starts up
 function initializePetCount() {
-	fs.readFile('data.json', 'utf8', (err, data) => {
+	fs.readFile('data/data.json', 'utf8', (err, data) => {
         if (err) {
             console.error('Error reading JSON file:', err);
             return;
